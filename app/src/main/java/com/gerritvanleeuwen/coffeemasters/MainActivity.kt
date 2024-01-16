@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun FirstComposable() {
     var name = remember { mutableStateOf("") }
