@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.gerritvanleeuwen.coffeemasters.ui.App
 import com.gerritvanleeuwen.coffeemasters.ui.theme.CoffeeMastersTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun FirstComposable() {
-    var name = remember { mutableStateOf("") }
+    val name = remember { mutableStateOf("") }
 
     Column() {
         Text("Hello ${name.value}",

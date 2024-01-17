@@ -1,17 +1,16 @@
-package com.gerritvanleeuwen.coffeemasters.ui
+package com.gerritvanleeuwen.coffeemasters
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.gerritvanleeuwen.coffeemasters.OffersPage
-import com.gerritvanleeuwen.coffeemasters.R
 import com.gerritvanleeuwen.coffeemasters.ui.theme.CoffeeMastersTheme
 
 @Preview
@@ -30,7 +29,9 @@ fun App() {
                      AppTitle()
                  }
         },
-        bottomBar = {}
+        bottomBar = {
+            Text("I'm a bottom bar")
+        }
     ) {
         OffersPage()
     }
