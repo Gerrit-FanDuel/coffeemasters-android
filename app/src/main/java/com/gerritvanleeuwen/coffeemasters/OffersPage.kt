@@ -38,9 +38,7 @@ fun Offer(title: String, description: String) {
         Image(painter = painterResource(id = R.drawable.background_pattern),
             contentDescription = "Background pattern",
             contentScale = ContentScale.FillWidth,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)
+            modifier = Modifier.matchParentSize()
         )
 
         Column(
@@ -53,13 +51,14 @@ fun Offer(title: String, description: String) {
                 style = MaterialTheme.typography.h5,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
-                    .background(Alternative1)
+                    .padding(16.dp)
+                    .background(Alternative2)
                     .padding(16.dp)
             )
-            Spacer(modifier = Modifier.height(16.dp))
             Text(text = description,
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
+                    .padding(16.dp)
                     .background(Alternative2)
                     .padding(16.dp)
             )
