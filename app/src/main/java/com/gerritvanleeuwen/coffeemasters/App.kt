@@ -11,22 +11,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.gerritvanleeuwen.coffeemasters.pages.InfoPage
 import com.gerritvanleeuwen.coffeemasters.pages.MenuPage
 import com.gerritvanleeuwen.coffeemasters.pages.OrderPage
-import com.gerritvanleeuwen.coffeemasters.ui.theme.CoffeeMastersTheme
-
-@Preview
-@Composable
-fun App_Preview() {
-    CoffeeMastersTheme {
-        App()
-    }
-}
 
 @Composable
-fun App() {
+fun App(dataManager: DataManager) {
     var selectedRoute = remember {
         mutableStateOf(Routes.MenuPage.route)
     }
@@ -39,9 +29,9 @@ fun App() {
         },
         content = {
                   when(selectedRoute.value) {
-                      Routes.MenuPage.route -> MenuPage()
+                      Routes.MenuPage.route -> MenuPage(dataManager)
                       Routes.OffersPage.route -> OffersPage()
-                      Routes.OrderPage.route -> OrderPage()
+                      Routes.OrderPage.route -> OrderPage(dataManager)
                       Routes.InfoPage.route -> InfoPage()
                   }
         },
