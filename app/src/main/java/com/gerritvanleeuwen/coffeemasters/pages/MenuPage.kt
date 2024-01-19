@@ -1,9 +1,9 @@
 package com.gerritvanleeuwen.coffeemasters.pages
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -13,30 +13,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.gerritvanleeuwen.coffeemasters.DataManager
-import com.gerritvanleeuwen.coffeemasters.R
 import com.gerritvanleeuwen.coffeemasters.ui.theme.Alternative1
 import com.gerritvanleeuwen.coffeemasters.ui.theme.CardBackground
+import com.gerritvanleeuwen.coffeemasters.ui.theme.Primary
 
 @Composable
 fun MenuPage(dataManager: DataManager) {
     LazyColumn {
-        item {
-            Text("${dataManager.menu.count()}")
-        }
-        items(5) {
-            Card(
-                elevation = 2.dp,
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .background(CardBackground)
-                    .padding(12.dp)
-            ) {
-                ProductItem(product = Product(1, "Dummy", 1.25, ""), onAdd = {})
-
+        items(dataManager.menu) {
+            Text(it.name,
+                color = Primary,
+                modifier = Modifier.padding(10.dp, 20.dp, 10.dp, 10.dp)
+                )
+            it.products.forEach {
+                Card(
+                    elevation = 2.dp,
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .background(CardBackground)
+                        .padding(12.dp)
+                ) {
+                    ProductItem(it, onAdd = {
+                        dataManager.cartAdd(it)
+                    })
+                }
             }
         }
     }
@@ -44,12 +48,6 @@ fun MenuPage(dataManager: DataManager) {
 
 // extending Double
 fun Double.format(digits: Int) = "%.${digits}f".format(this)
-
-//@Preview
-//@Composable
-//fun ProductItem_Preview() {
-//    ProductItem(product = Product(1, "Dummy", 1.25, ""), onAdd = {})
-//}
 
 @Composable
 fun ProductItem(product: Product, onAdd: (Product)->Unit) {
@@ -59,8 +57,8 @@ fun ProductItem(product: Product, onAdd: (Product)->Unit) {
             .background(Color.White)
     ) {
 
-        Image(
-            painter = painterResource(id = R.drawable.black_coffee),
+        AsyncImage(
+            model = product.imageUrl,
             contentDescription = "Image for ${product.name}",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
